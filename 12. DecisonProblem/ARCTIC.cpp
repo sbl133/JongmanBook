@@ -42,6 +42,10 @@ double optimize() {
 	return hi;
 }
 int main() {
+	// 소수점 고정
+	cout << fixed;
+	// 둘째 자리까지
+	cout.precision(2);
 	int testcase;
 	cin >> testcase;
 	while (testcase--) {
@@ -56,6 +60,6 @@ int main() {
 			for (int j = 0; j < n; j++)
 				dist[i][j] = sqrt(pow(pos[i].first - pos[j].first,2) + 
 					pow(pos[i].second - pos[j].second,2));
-		printf("%.2f\n", optimize());
+		cout << optimize() << endl;
 	}
 }
