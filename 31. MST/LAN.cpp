@@ -29,11 +29,9 @@ struct DisjointSet {
 int V;
 double adj[500][500];
 // kruscal 알고리즘
-// 최소 스패닝트리를 만드는데 필요한 간선들을 selected에 저장
-double kruscal(vector<pair<int, int>>& selected) {
+double kruscal() {
 	// 최소 스패닝트리를 만드는데 드는 총 비용 반환
 	double ret = 0;
-	selected.clear();
 	// 모든 간선들을 비용의 오름차순으로 정렬
 	vector<pair<double, pair<int, int>>> edges;
 	for(int i=0; i<V; i++)
@@ -48,10 +46,9 @@ double kruscal(vector<pair<int, int>>& selected) {
 		double cost = edges[i].first;
 		int u = edges[i].second.first;
 		int v = edges[i].second.second;
+		// 트리에 소속되어있지 않다면 소속시킨다
 		if (sets.find(u) == sets.find(v))continue;
-		// 트리에 소속되어있지 않다면 소속시키고 selected에 저장 및 비용 갱신
 		sets.merge(u, v);
-		selected.push_back(make_pair(u, v));
 		ret += cost;
 	}
 	return ret;
@@ -81,9 +78,8 @@ int main() {
 			adj[src][des] = 0;
 			adj[des][src] = 0;
 		}
-		vector<pair<int, int>> selected;
 		cout << fixed;
 		cout.precision(10);
-		cout << kruscal(selected) << endl;
+		cout << kruscal() << endl;
 	}
 }
